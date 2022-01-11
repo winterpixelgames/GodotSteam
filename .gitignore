@@ -1,4 +1,5 @@
 doxygen/
 **/*.o
+**/*.obj
 __pycache__
 
