@@ -1,5 +1,9 @@
+import os
+
 def can_build(env, platform):
-	return platform=="x11" or platform=="windows" or platform=="osx"
+	is_good_platform = platform=="x11" or platform=="windows" or platform=="osx"
+	is_steam_build = os.getenv('STEAM_BUILD')
+	return is_good_platform and is_steam_build
 
 def configure(env):
 	pass
