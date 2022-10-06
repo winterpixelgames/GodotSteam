@@ -1,5 +1,5 @@
 # GodotSteam for Godot Engine
-Steam API for the Godot game engine (version 3.x). For the Windows, Linux, and Mac platforms. 
+An open-source and fully functional Steamworks SDK / API module and plug-in for the Godot Game Engine (version 3.x). For the Windows, Linux, and Mac platforms. 
 
 Additional flavors include:
 - [Godot 2.x](https://github.com/Gramps/GodotSteam/tree/godot2)
@@ -9,7 +9,7 @@ Additional flavors include:
 
 Documentation
 ----------
-[Documentation is available here](https://gramps.github.io/GodotSteam/) and [there is the project's Wiki page here](https://github.com/Gramps/GodotSteam/wiki).
+[Documentation is available here](https://gramps.github.io/GodotSteam/) and [is mirrored on and exported from CoaguCo's site](https://coaguco.com/godotsteam).
 
 You can also check out the Search Help section inside Godot Engine after compiling it with GodotSteam.
 
@@ -17,49 +17,36 @@ Feel free to chat with us about GodotSteam on the [CoaguCo Discord server](https
 
 Current Build
 ----------
-You can [download pre-compiled versions _(currently v3.12.1)_ of this repo here](https://github.com/Gramps/GodotSteam/releases).
+You can [download pre-compiled versions _(currently v3.17.5)_ of this repo here](https://github.com/Gramps/GodotSteam/releases).
 
-**Version 3.12.1 Changes**
-- Fixed: incorrect case on app_installed and app_uninstalled, thanks to _craftablescience_
+**Version 3.17.5 Changes**
+- Changed: submitItemUpdate to use null if no notes are passed, thanks to _mashumafi_
+- Removed: unused server signals
 
-**Version 3.12 Changes**
-- Added: missing D_METHOD to all functions, should show the right argument names in-editor
-- Added: Input origin enums for PS5 and Steam Deck
-- Added: Input Types, Input Glyph Style, Input Glyph Size, and Input Configuration Enable Type enums
-- Added: getConnectionRealTimeStatus, configureConnectionLanes, connectP2PCustomSignaling, receivedP2PCustomSignal, getCertificateRequest, setCertificate, resetIdentity, runNetworkingCallbacks, beginAsyncRequestFakeIP, getFakeIP, createListenScoketP2PFakeIP, getRemoveFakeIPForConnection, and createFakeUDPPort functions and callback to NetworkingSockets class
-- Added: dismissFloatingGamepadTextInput function to Utils class
-- Added: setTimeCreatedDateRange and setTimeUpdatedDateRange to UGC class
-- Added: NetworkingeDebugOutputType enums for NetworkingUtils
-- Added: missing constant binds for Server API, OverlayToWebPageMode
-- Fixed: minor compiler warnings
-- Fixed: empty file hash being returned by file_details_result callback
-- Fixed: a variety of small bugs and possible crashes, _thanks to qarmin_
-- Fixed: missing binds for getFriendsGroupName, getFriendsGroupMembersList, getFriendsGroupIDByIndex, getFriendsGroupCount, getFriendMessage, getFriendCoplayTime, getFriendCoplayGame, getCoplayFriendCount, getCoplayFriend, getClanTag, getClanName, getClanCount, getClanChatMessage, getClanByIndex, getClanActivityCounts, fileWriteAsync, fileWriteStreamCancel, fileWriteStreamClose, fileWriteStreamOpen, fileWriteStreamWriteChunk, getCachedUGCCount, getUGCDownloadProgress, getUGCDetails, fileReadAsync, getOPFSettings, getOPFStringForApp, getVideoURL, isBroadcasting functions
-- Fixed: setPNGIcon and updateCurrentEntryCoverArt in Music Remote class
-- Fixed: missing getUGCDetails and getUGCDownloadProgress functions
-- Changed: updated doc_class file for in-editor documentation
-- Changed: updated to Steamworks 1.53
-- Changed: lobby_data_update, removed lobby data queries as they should be done manually
-- Changed: minor tweaks under-the-hood
-- Changed: various generic 'int' to their actual types
-- Changed: renamed servers and server stats to game server and game server stats respectively, to match SDK
-- Changed: SteamNetworkingQuickConnectionStatus to SteamNetConnectionRealTimeStatus_t per Steamworks SDK 1.53, causes a break in previous GodotSteam versions
-- Changed: getConfigValueInfo, removed name and next value from return dictionary as they are no longer passed by function in SDK 1.53
-- Changed: rearranged functions in godotsteam.cpp class binds to match godotsteam.h order
-- Changed: enum constant binds to match godotsteam.h enum order
-- Removed: unused callback new_launch_query_parameters, broadcast_upload_start, broadcast_upload_stop
-- Removed: allocateMessage as it shouldn't be used solo
-- Removed: getQuickConnectionStatus and getFirstConfigValue as they were removed from SDK 1.53
-- Removed: setDebugOutputFunction from Networking Utils
+**Version 3.17.4 Changes**
+- Changed: leaderboard_scores_downloaded and leaderboard_score_updated now pass back their handles; this is incompatible with earlier versions
+- Fixed: issue where leaderboard_score_uploaded would not fire if passed leaderboard_handle was not internally stored
 
-**Version 3.11.1 Changes**
-- Removed: unused structs
+**Version 3.17.3 Changes**
+- Fixed: getVoice and getAvailableVoice functions
+- Removed: all server functionality, put back into server branch
 
-**Version 3.11 Changes**
-- Added: server branch merged into master
-- Changed: spacing in default arguments in godotsteam.h
-- Changed: renamed STEAM_GAMESERVER_CALLBACK as STEAM_CALLBACK
-- Removed: SteamGameServer_RunCallbacks function
+**Version 3.17.2 Changes**
+- Changed: ping to data_age in getLocalPingLocation to accurately label the returned data
+
+**Version 3.17.1 Changes**
+- Fixed: missing comma in getVideoURL argument function
+- Fixed: argument name mismatch with file_details_result
+- Fixed: wrong int type for inventory update handle
+- Fixed: not casting app ID for addFavoriteGame
+- Fixed: wrong int type for server ID in getLobbyGameServer
+- Fixed: not casting account ID for createQueryUserUGCRequest
+
+**Version 3.17 Changes**
+- Added: new functions, enums for Steamworks SDK 1.55
+- Fixed: getPublicIP in Game Servers class
+
+[You can read more change-logs here](https://gramps.github.io/GodotSteam/changelog-godot3.html).
 
 Known Issues
 ----------
@@ -70,8 +57,12 @@ Known Issues
 
 Quick How-To
 ----------
+- Download the [pre-compiled editor from the Release section](https://github.com/Gramps/GodotSteam/releases) and unpack it.
+
+**Alternatively, to compile it yourself:**
+
 - Download this repository and unpack it.
-- Download and unpack the [Steamworks SDK 1.53](https://partner.steamgames.com); this requires a Steam developer account.
+- Download and unpack the [Steamworks SDK 1.55](https://partner.steamgames.com); this requires a Steam developer account.
   - Please see "Known Issues" above about versions.
 - Download and unpack the [Godot source 3.x](https://github.com/godotengine/godot).
 - Move the following to godotsteam/sdk/ folder:
